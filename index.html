@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YASH — ULTRA PORTFOLIO</title>
+<title>YASH — Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -26,12 +26,12 @@ video{
   z-index:-5;
 }
 
-/* 🌈 MULTI LAYER BG */
+/* 🌈 OVERLAY */
 .overlay{
   position:fixed;
   width:100%;
   height:100%;
-  background:linear-gradient(180deg,#000000aa,#000000ee);
+  background:linear-gradient(to bottom,#000000aa,#000000ee);
   z-index:-4;
 }
 
@@ -43,53 +43,38 @@ canvas{
   z-index:-3;
 }
 
-/* ✨ GLOW GRID */
-.grid-lines{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 100px,
-    rgba(0,198,255,0.05) 101px
-  );
-  z-index:-2;
-}
-
 /* 🔥 GLOW BLOBS */
 .blob{
   position:fixed;
-  width:500px;
-  height:500px;
+  width:400px;height:400px;
   background:#00c6ff;
-  filter:blur(150px);
+  filter:blur(120px);
   opacity:0.15;
-  z-index:-1;
+  z-index:-2;
 }
-.blob:nth-child(1){top:-150px;left:-150px}
-.blob:nth-child(2){bottom:-150px;right:-150px}
+.blob:nth-child(1){top:-100px;left:-100px}
+.blob:nth-child(2){bottom:-100px;right:-100px}
 
 /* 📦 CONTAINER */
 .container{
-  max-width:1200px;
+  max-width:1100px;
   margin:auto;
-  padding:100px 20px;
+  padding:80px 20px;
 }
 
-/* 💎 MAIN CARD */
+/* 💎 CARD */
 .card{
   background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(30px);
-  border-radius:30px;
-  padding:60px;
+  backdrop-filter:blur(25px);
+  border-radius:25px;
+  padding:50px;
   border:1px solid rgba(255,255,255,0.1);
-  box-shadow:0 0 80px rgba(0,198,255,0.15);
+  box-shadow:0 0 60px rgba(0,198,255,0.15);
 }
 
 /* 🧑 PROFILE */
 .profile{
-  width:150px;height:150px;
+  width:140px;height:140px;
   border-radius:50%;
   border:3px solid #00c6ff;
   display:block;
@@ -97,29 +82,30 @@ canvas{
   transition:0.4s;
 }
 .profile:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 40px #00c6ff;
+  transform:scale(1.08);
+  box-shadow:0 0 30px #00c6ff;
 }
 
 /* 🔥 NAME */
 h1{
   text-align:center;
-  font-size:3em;
-  margin-top:20px;
+  font-size:2.8em;
+  margin-top:15px;
 }
 
-/* 💬 SUB */
-.subtitle{
+/* 💬 INTRO */
+.intro{
   text-align:center;
-  color:#aaa;
-  margin-top:5px;
+  color:#ccc;
+  margin-top:10px;
+  line-height:1.6;
 }
 
-/* ✨ SECTION */
+/* 📋 SECTION */
 .section{
-  margin-top:60px;
+  margin-top:50px;
   opacity:0;
-  transform:translateY(50px);
+  transform:translateY(40px);
   transition:1s;
 }
 .section.active{
@@ -128,7 +114,7 @@ h1{
 }
 
 .section h2{
-  margin-bottom:15px;
+  margin-bottom:10px;
   border-left:4px solid #00c6ff;
   padding-left:10px;
 }
@@ -136,41 +122,27 @@ h1{
 /* 📊 GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
 }
 
 .box{
   padding:20px;
-  border-radius:20px;
+  border-radius:15px;
   background:rgba(255,255,255,0.05);
-  transition:0.4s;
+  transition:0.3s;
 }
 .box:hover{
-  transform:translateY(-10px) scale(1.03);
+  transform:translateY(-8px);
   background:#00c6ff22;
-  box-shadow:0 0 25px #00c6ff55;
-}
-
-/* 📊 PROGRESS */
-.progress{
-  height:8px;
-  background:#222;
-  border-radius:10px;
-  overflow:hidden;
-  margin-top:5px;
-}
-.progress div{
-  height:100%;
-  background:linear-gradient(90deg,#00c6ff,#0072ff);
 }
 
 /* 🔘 BUTTON */
 .btn{
   display:block;
-  margin-top:50px;
+  margin-top:40px;
   text-align:center;
-  padding:18px;
+  padding:15px;
   border-radius:50px;
   background:linear-gradient(135deg,#00c6ff,#0072ff);
   text-decoration:none;
@@ -179,14 +151,14 @@ h1{
   transition:0.3s;
 }
 .btn:hover{
-  transform:scale(1.07);
-  box-shadow:0 0 40px #00c6ff;
+  transform:scale(1.05);
+  box-shadow:0 0 30px #00c6ff;
 }
 
 /* 📌 FOOTER */
 footer{
   text-align:center;
-  margin-top:60px;
+  margin-top:50px;
   color:#777;
 }
 </style>
@@ -194,87 +166,90 @@ footer{
 
 <body>
 
+<!-- 🎥 VIDEO -->
 <video autoplay muted loop>
 <source src="bg.mp4">
 </video>
 
 <div class="overlay"></div>
 <canvas id="particles"></canvas>
-<div class="grid-lines"></div>
 
 <div class="blob"></div>
 <div class="blob"></div>
 
 <div class="container">
-
 <div class="card">
 
 <img src="file.png" class="profile">
 
 <h1>YASH</h1>
-<p class="subtitle">16 • India • School Student</p>
 
-<!-- ABOUT -->
+<p class="intro">
+Hi, I'm Yash.  
+A 16-year-old school student from India 🇮🇳.  
+I believe in growth, consistency and building a better future step by step.
+</p>
+
+<!-- 📋 INFO -->
 <div class="section">
-<h2>About Me</h2>
-<p>I believe in growth, discipline and building a strong future step by step. Living simple, thinking big.</p>
+<h2>Basic Information</h2>
+<p>
+Age: 16 <br>
+Country: India 🇮🇳 <br>
+Status: School Student
+</p>
 </div>
 
-<!-- SKILLS -->
+<!-- 📊 SKILLS -->
 <div class="section">
-<h2>Skills</h2>
+<h2>Skills & Strengths</h2>
 <div class="grid">
-
-<div class="box">
-Creative Thinking
-<div class="progress"><div style="width:85%"></div></div>
-</div>
-
-<div class="box">
-Communication
-<div class="progress"><div style="width:75%"></div></div>
-</div>
-
-<div class="box">
-Problem Solving
-<div class="progress"><div style="width:80%"></div></div>
-</div>
-
-<div class="box">
-Focus
-<div class="progress"><div style="width:90%"></div></div>
-</div>
-
+<div class="box">Creative Thinking</div>
+<div class="box">Problem Solving</div>
+<div class="box">Communication</div>
+<div class="box">Self Improvement</div>
+<div class="box">Focus & Discipline</div>
+<div class="box">Learning Mindset</div>
 </div>
 </div>
 
-<!-- EXTRA -->
+<!-- 🧠 MINDSET -->
 <div class="section">
 <h2>Mindset</h2>
-<p>Consistency beats motivation. Small steps every day lead to big results.</p>
+<p>
+Focused on long-term success.  
+I believe consistency and discipline are the keys to growth.
+</p>
 </div>
 
+<!-- 🚀 JOURNEY -->
 <div class="section">
 <h2>Journey</h2>
-<p>Started small, learning daily, improving slowly but surely.</p>
+<p>
+Starting small, learning daily and improving step by step.  
+Every day is a new chance to become better.
+</p>
 </div>
 
-<a href="https://t.me/YAsHSTARK_18" class="btn">Connect on Telegram</a>
+<!-- 🔗 BUTTON -->
+<a href="https://t.me/YAsHSTARK_18" class="btn">Contact on Telegram</a>
 
-<footer>© 2026 Yash • Built by Yash ⚡</footer>
+<footer>
+© 2026 Yash • Built by Yash ⚡
+</footer>
 
 </div>
 </div>
 
 <script>
-/* PARTICLES */
+/* 🌌 PARTICLES */
 let c=document.getElementById("particles");
 let ctx=c.getContext("2d");
 c.width=window.innerWidth;
 c.height=window.innerHeight;
 
 let p=[];
-for(let i=0;i<150;i++){
+for(let i=0;i<120;i++){
  p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2});
 }
 
@@ -290,7 +265,7 @@ function draw(){
 }
 draw();
 
-/* SCROLL */
+/* ✨ SCROLL */
 let sections=document.querySelectorAll(".section");
 window.addEventListener("scroll",()=>{
  sections.forEach(sec=>{
