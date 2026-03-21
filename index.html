@@ -3,205 +3,204 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YASH - PORTFOLIO</title>
+<title>YASH - LEGEND PORTFOLIO</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
-body,html{
-  height:100%;
+body{
   font-family:'Poppins',sans-serif;
+  background:#000;
   color:#fff;
   overflow:hidden;
+  cursor:none;
 }
 
-/* 🎥 Background Video */
+/* 🔥 LOADER */
+#loader{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+  font-size:2em;
+  letter-spacing:2px;
+  animation:fadeOut 2s forwards 2s;
+}
+
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden}
+}
+
+/* 🎯 CUSTOM CURSOR */
+.cursor{
+  width:20px;height:20px;
+  border:2px solid #00c6ff;
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+}
+
+/* 🎥 VIDEO */
 video{
   position:fixed;
-  top:0;
-  left:0;
   width:100%;
   height:100%;
   object-fit:cover;
+  z-index:-3;
+}
+
+/* 🌌 PARTICLES */
+canvas{
+  position:fixed;
+  width:100%;
+  height:100%;
   z-index:-2;
 }
 
-/* 🌑 Overlay */
+/* 🌑 OVERLAY */
 .overlay{
   position:fixed;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.65);
+  background:rgba(0,0,0,0.7);
   z-index:-1;
 }
 
-/* 📦 Container */
+/* 💎 CARD */
 .container{
-  height:100%;
-  overflow-y:auto;
   display:flex;
   justify-content:center;
-  align-items:flex-start;
-  padding:60px 20px;
+  padding:60px 15px;
+  height:100vh;
+  overflow-y:auto;
 }
 
-/* 💎 Card */
 .card{
-  max-width:850px;
+  max-width:900px;
   width:100%;
-  background:rgba(255,255,255,0.08);
-  border-radius:25px;
   padding:40px;
-  backdrop-filter:blur(15px);
-  border:1px solid rgba(255,255,255,0.2);
+  border-radius:25px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(25px);
   text-align:center;
-  animation:fadeIn 1.2s ease;
+  box-shadow:0 0 40px rgba(0,198,255,0.4);
 }
 
-/* ✨ Animation */
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(40px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* 🧑 Profile */
-.profile{
-  width:150px;
-  height:150px;
+/* 🧑 IMAGE */
+img{
+  width:150px;height:150px;
   border-radius:50%;
-  border:3px solid #fff;
-  object-fit:cover;
-  margin-bottom:20px;
+  border:3px solid #00c6ff;
+  transition:0.4s;
+}
+img:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 30px #00c6ff;
 }
 
-/* 🔥 Name */
-h1{
-  font-size:2.8em;
-  margin-bottom:10px;
-}
+/* 🔥 TEXT */
+h1{font-size:2.8em;margin-top:10px}
+p{color:#ccc;margin-top:10px}
 
-/* 💬 Text */
-p{
-  font-size:1.1em;
-  line-height:1.6;
-  color:#ddd;
-}
+/* ⌨️ TYPING */
+#typing{color:#00c6ff;font-weight:bold}
 
-/* 📋 Sections */
-.section{
-  margin-top:30px;
-  text-align:left;
-}
-
-.section h2{
-  margin-bottom:10px;
-  border-bottom:1px solid #fff;
-  padding-bottom:5px;
-}
-
-.section ul{
-  list-style:none;
-  line-height:1.9;
-}
-
-.section ul li::before{
-  content:"› ";
-  color:#00c6ff;
-}
-
-/* 🔘 Button */
+/* 🔘 BTN */
 .btn{
   display:inline-block;
-  margin-top:30px;
-  padding:14px 30px;
+  margin-top:25px;
+  padding:12px 30px;
   border-radius:50px;
   text-decoration:none;
-  color:#fff;
   background:linear-gradient(135deg,#00c6ff,#0072ff);
-  transition:0.3s;
-  box-shadow:0 0 15px #00c6ff;
+  color:#fff;
 }
 
-.btn:hover{
-  transform:scale(1.08);
-  box-shadow:0 0 25px #00c6ff;
-}
-
-/* 📌 Footer */
-footer{
-  margin-top:40px;
-  font-size:0.9em;
-  color:#aaa;
-}
+/* 📌 FOOTER */
+footer{margin-top:20px;color:#888}
 </style>
 </head>
 
 <body>
 
-<!-- 🎥 Video -->
+<div id="loader">Loading Yash...</div>
+
+<div class="cursor" id="cursor"></div>
+
 <video autoplay muted loop>
-  <source src="bg.mp4" type="video/mp4">
+<source src="bg.mp4">
 </video>
 
+<canvas id="canvas"></canvas>
 <div class="overlay"></div>
 
 <div class="container">
-  <div class="card">
+<div class="card">
 
-    <!-- 🧑 Image -->
-    <img src="file.png" class="profile">
+<img src="file.png">
 
-    <!-- 🔥 Name -->
-    <h1>YASH</h1>
+<h1>YASH</h1>
+<p id="typing"></p>
 
-    <!-- 💬 Intro -->
-    <p>
-      Hi! I'm Yash — 16 years old school student from India 🇮🇳 <br>
-      Living where I belong, dreaming big and growing every day.
-    </p>
+<p>16 | India 🇮🇳 | School Student</p>
 
-    <!-- 📋 About -->
-    <div class="section">
-      <h2>About Me</h2>
-      <ul>
-        <li><strong>Country:</strong> India</li>
-        <li><strong>Age:</strong> 16</li>
-        <li><strong>Class:</strong> School Student</li>
-        <li><strong>Hobbies:</strong> Learning, exploring, self growth</li>
-      </ul>
-    </div>
+<a href="https://t.me/YAsHSTARK_18" class="btn">Contact Me</a>
 
-    <!-- 🧠 Skills -->
-    <div class="section">
-      <h2>Skills</h2>
-      <ul>
-        <li>Creative Thinking</li>
-        <li>Communication</li>
-        <li>Problem Solving</li>
-        <li>Learning & Exploring</li>
-        <li>Self Improvement</li>
-      </ul>
-    </div>
+<footer>Built by Yash ⚡</footer>
 
-    <!-- 🔗 Button -->
-    <a href="https://t.me/YAsHSTARK_18" target="_blank" class="btn">
-      Contact Me on Telegram
-    </a>
-
-    <!-- 📌 Footer -->
-    <footer>
-      © 2026 Yash. All rights reserved. <br>
-      Built by Yash ⚡
-    </footer>
-
-  </div>
+</div>
 </div>
 
+<script>
+/* ⌨️ TYPING */
+let txt="Silent moves... Big dreams...";
+let i=0;
+function type(){
+ if(i<txt.length){
+  document.getElementById("typing").innerHTML+=txt.charAt(i);
+  i++;
+  setTimeout(type,60);
+ }
+}
+type();
+
+/* 🎯 CURSOR */
+let cursor=document.getElementById("cursor");
+document.addEventListener("mousemove",e=>{
+ cursor.style.top=e.clientY+"px";
+ cursor.style.left=e.clientX+"px";
+});
+
+/* 🌌 PARTICLES */
+let c=document.getElementById("canvas");
+let ctx=c.getContext("2d");
+c.width=window.innerWidth;
+c.height=window.innerHeight;
+
+let p=[];
+for(let i=0;i<100;i++){
+ p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2});
+}
+
+function draw(){
+ ctx.clearRect(0,0,c.width,c.height);
+ p.forEach(a=>{
+  ctx.beginPath();
+  ctx.arc(a.x,a.y,a.r,0,Math.PI*2);
+  ctx.fillStyle="#00c6ff";
+  ctx.fill();
+ });
+ requestAnimationFrame(draw);
+}
+draw();
+</script>
+
 </body>
-  </html>
+</html>
