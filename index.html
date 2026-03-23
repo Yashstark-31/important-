@@ -100,9 +100,34 @@ footer{margin-top:40px;font-size:0.9em;color:#aaa;}
 .wave:nth-child(2){animation-delay:0.2s;}
 .wave:nth-child(3){animation-delay:0.4s;}
 .wave:nth-child(4){animation-delay:0.6s;}
+
 @keyframes wave{
   0%,100%{height:10px;}
   50%{height:25px;}
+}
+
+/* 🎶 Music Box */
+.music-box{
+  margin-top:30px;
+  background:rgba(255,255,255,0.1);
+  padding:15px;
+  border-radius:15px;
+  backdrop-filter:blur(10px);
+}
+
+.marquee{
+  margin-top:10px;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.marquee span{
+  display:inline-block;
+  padding-left:100%;
+  animation:scroll 10s linear infinite;
+}
+@keyframes scroll{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-100%);}
 }
 </style>
 </head>
@@ -115,24 +140,9 @@ footer{margin-top:40px;font-size:0.9em;color:#aaa;}
 
 <div class="overlay"></div>
 
-<!-- 🎵 Music -->
 <audio id="bgMusic" autoplay loop>
   <source src="song.mp3" type="audio/mp3">
 </audio>
-
-<!-- 🎶 Music Box -->
-<div style="position:fixed; bottom:120px; left:50%; transform:translateX(-50%);
-background:rgba(255,255,255,0.1); padding:12px 20px; border-radius:15px;
-backdrop-filter:blur(10px); text-align:center; font-size:14px;">
-  🎧 Now Playing...
-  <div style="display:flex; justify-content:center; gap:4px; margin-top:8px;">
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-  </div>
-  <p style="margin-top:6px; font-size:12px;">Listen full song then go</p>
-</div>
 
 <div class="container">
   <div class="card">
@@ -171,6 +181,23 @@ backdrop-filter:blur(10px); text-align:center; font-size:14px;">
       Contact Me on Telegram
     </a>
 
+    <!-- 🎶 MUSIC BOX (FIXED POSITION) -->
+    <div class="music-box">
+      🎧 Now Playing
+
+      <div style="display:flex; justify-content:center; gap:4px; margin-top:10px;">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+      </div>
+
+      <!-- 🎵 CC -->
+      <div class="marquee">
+        <span>♪ Your song is playing... enjoy the vibe 🎶 ♪</span>
+      </div>
+    </div>
+
     <!-- 💬 Feedback -->
     <div class="section">
       <h2>Feedback</h2>
@@ -181,8 +208,12 @@ backdrop-filter:blur(10px); text-align:center; font-size:14px;">
       <button onclick="addFeedback()" 
       style="margin-top:10px; padding:10px 20px; border:none; border-radius:10px;
       background:#00c6ff; color:white;">Submit</button>
+    </div>
 
-      <ul id="feedbackList" style="margin-top:20px;"></ul>
+    <!-- 📋 Reviews -->
+    <div class="section">
+      <h2>Reviews</h2>
+      <ul id="feedbackList"></ul>
     </div>
 
     <footer>
@@ -193,7 +224,6 @@ backdrop-filter:blur(10px); text-align:center; font-size:14px;">
   </div>
 </div>
 
-<!-- 🔥 Firebase -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -215,8 +245,7 @@ async function addFeedback(){
   if(input.value.trim() === "") return;
 
   await addDoc(collection(db, "feedback"), {
-    text: input.value,
-    time: Date.now()
+    text: input.value
   });
 
   input.value = "";
