@@ -52,7 +52,23 @@ video{
   text-align:center;
 }
 
-/* 🎧 PLAYER */
+/* PROFILE */
+.profile{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #fff;
+  margin-bottom:15px;
+}
+
+/* SECTIONS */
+.section{
+  margin-top:25px;
+  text-align:left;
+}
+
+/* PLAYER */
 .music-box{
   margin-top:30px;
   padding:20px;
@@ -64,14 +80,11 @@ video{
   width:120px;
   height:120px;
   border-radius:15px;
-  object-fit:cover;
-  margin-bottom:10px;
 }
 
 .song-name{
+  margin-top:8px;
   color:#ccc;
-  font-size:14px;
-  margin-bottom:10px;
 }
 
 #visualizer{
@@ -109,6 +122,15 @@ video{
   background:#00c6ff;
   color:white;
 }
+
+/* 🎵 LYRICS */
+.lyrics{
+  margin-top:12px;
+  font-size:14px;
+  color:#ddd;
+  min-height:22px;
+  text-align:center;
+}
 </style>
 </head>
 
@@ -127,8 +149,24 @@ video{
 <div class="container">
 <div class="card">
 
+<img src="file.png" class="profile">
+
 <h1>YASH</h1>
-<p>16-year-old student from India 🇮🇳</p>
+<p>Hi! I'm Yash — 16 years old student from India 🇮🇳</p>
+
+<div class="section">
+<h2>About</h2>
+<p>Learning, growing and exploring.</p>
+</div>
+
+<div class="section">
+<h2>Skills</h2>
+<ul>
+<li>Creative Thinking</li>
+<li>Problem Solving</li>
+<li>Self Growth</li>
+</ul>
+</div>
 
 <a href="https://t.me/YAsHSTARK_18">Contact Me</a>
 
@@ -152,40 +190,44 @@ video{
 
 <button class="play-btn" onclick="toggleMusic()" id="playBtn">⏸</button>
 
+<div class="lyrics" id="lyrics">🎶 Starting...</div>
+
 </div>
 
 </div>
 </div>
 
 <script>
-const audio = document.getElementById("bgMusic");
-const btn = document.getElementById("playBtn");
-const progress = document.getElementById("progressBar");
-const current = document.getElementById("current");
-const duration = document.getElementById("duration");
+const audio=document.getElementById("bgMusic");
+const btn=document.getElementById("playBtn");
+const progress=document.getElementById("progressBar");
+const current=document.getElementById("current");
+const duration=document.getElementById("duration");
+const lyricsEl=document.getElementById("lyrics");
 
 // autoplay fix
 audio.play().catch(()=>{
-  document.addEventListener("click", ()=>audio.play(), {once:true});
+  document.addEventListener("click",()=>audio.play(),{once:true});
 });
 
-// ▶️ play pause
+// play pause
 function toggleMusic(){
   if(audio.paused){
     audio.play();
     btn.innerText="⏸";
-  } else {
+  }else{
     audio.pause();
     btn.innerText="▶";
   }
 }
 
-// ⏱ progress
-audio.addEventListener("timeupdate", ()=>{
-  let percent=(audio.currentTime/audio.duration)*100;
-  progress.style.width=percent+"%";
+// progress + lyrics
+audio.addEventListener("timeupdate",()=>{
+  let p=(audio.currentTime/audio.duration)*100;
+  progress.style.width=p+"%";
   current.innerText=format(audio.currentTime);
   duration.innerText=format(audio.duration);
+  updateLyrics(audio.currentTime);
 });
 
 function format(t){
@@ -195,11 +237,35 @@ function format(t){
   return m+":"+(s<10?"0"+s:s);
 }
 
-// 🎯 seek
+// seek
 function seek(e){
-  let rect=e.currentTarget.getBoundingClientRect();
-  let x=e.clientX-rect.left;
-  audio.currentTime=(x/rect.width)*audio.duration;
+  let r=e.currentTarget.getBoundingClientRect();
+  let x=e.clientX-r.left;
+  audio.currentTime=(x/r.width)*audio.duration;
+}
+
+// 🎵 FULL LYRICS SCRIPT
+const lyrics = [
+{time:0,text:"🎶 Bairan..."},
+{time:6,text:"Tere bina lagta hai dil kahin na lage"},
+{time:12,text:"Raaton me bhi tera khayal hi jage"},
+{time:18,text:"Saanson me basi hai teri hi baatein"},
+{time:24,text:"Dil ye pukare tu hi tu aake"},
+{time:30,text:"Bairan si yaadein sataaye mujhe"},
+{time:36,text:"Har pal tera ehsaas dilaye mujhe"},
+{time:42,text:"Tu hi meri manzil tu hi raasta"},
+{time:48,text:"Tujhse hi mera har ek vaasta"},
+{time:54,text:"🎶 Bairan... Bairan..."},
+{time:60,text:"Dil mera tere naam ka deewana"},
+];
+
+function updateLyrics(time){
+  for(let i=lyrics.length-1;i>=0;i--){
+    if(time>=lyrics[i].time){
+      lyricsEl.innerText=lyrics[i].text;
+      break;
+    }
+  }
 }
 
 // 🌊 visualizer
