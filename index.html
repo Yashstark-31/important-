@@ -3,244 +3,243 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YASH — Cinematic 3D</title>
+<title>YASH - PORTFOLIO</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box;}
 
-body{
+body,html{
+  height:100%;
   font-family:'Poppins',sans-serif;
-  background:#000;
   color:#fff;
-  overflow-x:hidden;
-  perspective:1500px;
+  overflow:hidden;
 }
 
-/* 🎥 VIDEO BG */
 video{
   position:fixed;
-  width:100%;
-  height:100%;
+  top:0;left:0;
+  width:100%;height:100%;
   object-fit:cover;
-  z-index:-6;
+  z-index:-2;
 }
 
-/* 🌑 DARK LAYER */
 .overlay{
   position:fixed;
-  width:100%;
-  height:100%;
-  background:radial-gradient(circle at center,#00000088,#000000ee);
-  z-index:-5;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.65);
+  z-index:-1;
 }
 
-/* 🌌 PARTICLES */
-canvas{
-  position:fixed;
-  width:100%;
-  height:100%;
-  z-index:-4;
-}
-
-/* 💡 LIGHT FOLLOW */
-.light{
-  position:fixed;
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  pointer-events:none;
-  background:radial-gradient(circle,#00c6ff55,transparent);
-  z-index:-3;
-  mix-blend-mode:screen;
-}
-
-/* 📦 CONTAINER */
 .container{
-  max-width:1100px;
-  margin:auto;
-  padding:100px 20px;
+  height:100%;
+  overflow-y:auto;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:60px 20px;
 }
 
-/* 🧊 MAIN CARD */
 .card{
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(30px);
-  border-radius:30px;
-  padding:60px;
-  border:1px solid rgba(255,255,255,0.1);
-  transform-style:preserve-3d;
-  transition:transform 0.15s ease-out;
+  max-width:850px;
+  width:100%;
+  background:rgba(255,255,255,0.08);
+  border-radius:25px;
+  padding:40px;
+  backdrop-filter:blur(15px);
+  border:1px solid rgba(255,255,255,0.2);
+  text-align:center;
+  animation:fadeIn 1.2s ease;
 }
 
-/* 🧑 PROFILE */
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
 .profile{
   width:150px;height:150px;
   border-radius:50%;
-  border:3px solid #00c6ff;
-  display:block;
-  margin:auto;
-  transition:0.4s;
-}
-.profile:hover{
-  transform:translateZ(40px) scale(1.1);
-  box-shadow:0 0 40px #00c6ff;
+  border:3px solid #fff;
+  object-fit:cover;
+  margin-bottom:20px;
 }
 
-/* 🔥 TEXT */
-h1{text-align:center;font-size:3em;margin-top:20px}
-.intro{text-align:center;color:#ccc;margin-top:10px}
+h1{font-size:2.8em;margin-bottom:10px;}
 
-/* 📋 SECTION */
-.section{
-  margin-top:60px;
-  transform:translateY(80px);
-  opacity:0;
-  transition:1.2s;
-}
-.section.show{
-  transform:translateY(0);
-  opacity:1;
-}
+p{font-size:1.1em;line-height:1.6;color:#ddd;}
 
-/* 📊 GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-}
+.section{margin-top:30px;text-align:left;}
+.section h2{margin-bottom:10px;border-bottom:1px solid #fff;padding-bottom:5px;}
+.section ul{list-style:none;line-height:1.9;}
+.section ul li::before{content:"› ";color:#00c6ff;}
 
-.box{
-  padding:20px;
-  border-radius:15px;
-  background:rgba(255,255,255,0.05);
-  transition:0.4s;
-}
-.box:hover{
-  transform:translateY(-12px) translateZ(30px);
-  background:#00c6ff22;
-  box-shadow:0 0 30px #00c6ff44;
-}
-
-/* 🔘 BUTTON */
 .btn{
-  display:block;
-  margin-top:40px;
-  padding:15px;
-  text-align:center;
+  display:inline-block;
+  margin-top:30px;
+  padding:14px 30px;
   border-radius:50px;
-  background:linear-gradient(135deg,#00c6ff,#0072ff);
   text-decoration:none;
   color:#fff;
+  background:linear-gradient(135deg,#00c6ff,#0072ff);
   transition:0.3s;
+  box-shadow:0 0 15px #00c6ff;
 }
 .btn:hover{
-  transform:scale(1.07);
-  box-shadow:0 0 40px #00c6ff;
+  transform:scale(1.08);
+  box-shadow:0 0 25px #00c6ff;
 }
 
-footer{text-align:center;margin-top:60px;color:#777}
+footer{margin-top:40px;font-size:0.9em;color:#aaa;}
+
+.wave{
+  width:4px;height:15px;background:#00c6ff;
+  animation:wave 1s infinite ease-in-out;
+}
+.wave:nth-child(2){animation-delay:0.2s;}
+.wave:nth-child(3){animation-delay:0.4s;}
+.wave:nth-child(4){animation-delay:0.6s;}
+@keyframes wave{
+  0%,100%{height:10px;}
+  50%{height:25px;}
+}
 </style>
 </head>
 
 <body>
 
 <video autoplay muted loop>
-<source src="bg.mp4">
+  <source src="bg.mp4" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
-<canvas id="particles"></canvas>
-<div class="light" id="light"></div>
+
+<!-- 🎵 Music -->
+<audio id="bgMusic" autoplay loop>
+  <source src="song.mp3" type="audio/mp3">
+</audio>
+
+<!-- 🎶 Music Box -->
+<div style="position:fixed; bottom:120px; left:50%; transform:translateX(-50%);
+background:rgba(255,255,255,0.1); padding:12px 20px; border-radius:15px;
+backdrop-filter:blur(10px); text-align:center; font-size:14px;">
+  🎧 Now Playing...
+  <div style="display:flex; justify-content:center; gap:4px; margin-top:8px;">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+  <p style="margin-top:6px; font-size:12px;">Listen full song then go</p>
+</div>
 
 <div class="container">
-<div class="card" id="card">
+  <div class="card">
 
-<img src="file.png" class="profile">
+    <img src="file.png" class="profile">
 
-<h1>YASH</h1>
+    <h1>YASH</h1>
 
-<p class="intro">
-Hi, I'm Yash — a 16-year-old student from India 🇮🇳  
-Focused on growth, discipline and building a better future.
-</p>
+    <p>
+      Hi! I'm Yash — 16 years old school student from India 🇮🇳 <br>
+      Living where I belong, dreaming big and growing every day.
+    </p>
 
-<div class="section">
-<h2>About</h2>
-<p>Simple mindset. Strong vision. Continuous growth.</p>
+    <div class="section">
+      <h2>About Me</h2>
+      <ul>
+        <li><strong>Country:</strong> India</li>
+        <li><strong>Age:</strong> 16</li>
+        <li><strong>Class:</strong> School Student</li>
+        <li><strong>Hobbies:</strong> Learning, exploring, self growth</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Skills</h2>
+      <ul>
+        <li>Creative Thinking</li>
+        <li>Communication</li>
+        <li>Problem Solving</li>
+        <li>Learning & Exploring</li>
+        <li>Self Improvement</li>
+      </ul>
+    </div>
+
+    <a href="https://t.me/YAsHSTARK_18" target="_blank" class="btn">
+      Contact Me on Telegram
+    </a>
+
+    <!-- 💬 Feedback -->
+    <div class="section">
+      <h2>Feedback</h2>
+
+      <textarea id="feedbackInput" placeholder="Write feedback..."
+      style="width:100%; padding:10px; border-radius:10px; margin-top:10px;"></textarea>
+
+      <button onclick="addFeedback()" 
+      style="margin-top:10px; padding:10px 20px; border:none; border-radius:10px;
+      background:#00c6ff; color:white;">Submit</button>
+
+      <ul id="feedbackList" style="margin-top:20px;"></ul>
+    </div>
+
+    <footer>
+      © 2026 Yash. All rights reserved. <br>
+      Built by Yash ⚡
+    </footer>
+
+  </div>
 </div>
 
-<div class="section">
-<h2>Skills</h2>
-<div class="grid">
-<div class="box">Creative Thinking</div>
-<div class="box">Focus</div>
-<div class="box">Communication</div>
-<div class="box">Self Growth</div>
-</div>
-</div>
+<!-- 🔥 Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-<div class="section">
-<h2>Journey</h2>
-<p>Learning daily, improving step by step, building consistency.</p>
-</div>
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_ID",
+  storageBucket: "YOUR_BUCKET",
+  messagingSenderId: "YOUR_MSG_ID",
+  appId: "YOUR_APP_ID"
+};
 
-<a href="https://t.me/YAsHSTARK_18" class="btn">Contact on Telegram</a>
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-<footer>© 2026 Yash • Built by Yash ⚡</footer>
+async function addFeedback(){
+  let input = document.getElementById("feedbackInput");
+  if(input.value.trim() === "") return;
 
-</div>
-</div>
+  await addDoc(collection(db, "feedback"), {
+    text: input.value,
+    time: Date.now()
+  });
 
-<script>
-/* 🌌 PARTICLES */
-let c=document.getElementById("particles");
-let ctx=c.getContext("2d");
-c.width=window.innerWidth;
-c.height=window.innerHeight;
-
-let p=[];
-for(let i=0;i<150;i++){
- p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2});
+  input.value = "";
+  loadFeedback();
 }
 
-function draw(){
- ctx.clearRect(0,0,c.width,c.height);
- p.forEach(a=>{
-  ctx.beginPath();
-  ctx.arc(a.x,a.y,a.r,0,Math.PI*2);
-  ctx.fillStyle="#00c6ff";
-  ctx.fill();
- });
- requestAnimationFrame(draw);
+async function loadFeedback(){
+  let list = document.getElementById("feedbackList");
+  list.innerHTML = "";
+
+  const querySnapshot = await getDocs(collection(db, "feedback"));
+  querySnapshot.forEach(doc => {
+    let li = document.createElement("li");
+    li.textContent = doc.data().text;
+    list.appendChild(li);
+  });
 }
-draw();
 
-/* ✨ SCROLL */
-let sections=document.querySelectorAll(".section");
-window.addEventListener("scroll",()=>{
- sections.forEach(sec=>{
-  if(sec.getBoundingClientRect().top<window.innerHeight-100){
-    sec.classList.add("show");
-  }
- });
-});
+loadFeedback();
 
-/* 🧠 3D PARALLAX */
-const card=document.getElementById("card");
-document.addEventListener("mousemove",e=>{
- let x=(window.innerWidth/2 - e.clientX)/20;
- let y=(window.innerHeight/2 - e.clientY)/20;
- card.style.transform=`rotateY(${x}deg) rotateX(${y}deg)`;
-});
-
-/* 💡 LIGHT FOLLOW */
-let light=document.getElementById("light");
-document.addEventListener("mousemove",e=>{
- light.style.left=e.clientX-150+"px";
- light.style.top=e.clientY-150+"px";
-});
+document.body.addEventListener("click", function(){
+  document.getElementById("bgMusic").play();
+}, {once:true});
 </script>
 
 </body>
