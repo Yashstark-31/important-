@@ -21,7 +21,6 @@ body,html{
   overflow:hidden;
 }
 
-/* 🎥 Background Video */
 video{
   position:fixed;
   top:0;
@@ -32,7 +31,6 @@ video{
   z-index:-2;
 }
 
-/* 🌑 Overlay */
 .overlay{
   position:fixed;
   width:100%;
@@ -41,7 +39,6 @@ video{
   z-index:-1;
 }
 
-/* 📦 Container */
 .container{
   height:100%;
   overflow-y:auto;
@@ -51,7 +48,6 @@ video{
   padding:60px 20px;
 }
 
-/* 💎 Card */
 .card{
   max-width:850px;
   width:100%;
@@ -69,7 +65,6 @@ video{
   to{opacity:1; transform:translateY(0);}
 }
 
-/* 🧑 Profile */
 .profile{
   width:150px;
   height:150px;
@@ -79,20 +74,17 @@ video{
   margin-bottom:20px;
 }
 
-/* 🔥 Name */
 h1{
   font-size:2.8em;
   margin-bottom:10px;
 }
 
-/* 💬 Text */
 p{
   font-size:1.1em;
   line-height:1.6;
   color:#ddd;
 }
 
-/* 📋 Sections */
 .section{
   margin-top:30px;
   text-align:left;
@@ -114,7 +106,6 @@ p{
   color:#00c6ff;
 }
 
-/* 🔘 Buttons */
 .btn{
   display:inline-block;
   margin-top:20px;
@@ -132,27 +123,29 @@ p{
   box-shadow:0 0 25px #00c6ff;
 }
 
-/* 📸 Instagram Button */
 .insta{
   background:linear-gradient(135deg,#ff00cc,#3333ff);
   box-shadow:0 0 15px #ff00cc;
 }
 
-.insta:hover{
-  box-shadow:0 0 25px #ff00cc;
-}
-
-/* 🎧 MUSIC BOX */
 .music-box{
   margin-top:30px;
   padding:20px;
   border-radius:20px;
   background:rgba(255,255,255,0.05);
   backdrop-filter:blur(10px);
-  text-align:center;
 }
 
-/* 🌊 WAVE */
+/* 🎵 Cover Image */
+.song-cover{
+  width:120px;
+  height:120px;
+  border-radius:15px;
+  object-fit:cover;
+  margin-bottom:10px;
+}
+
+/* 🌊 Wave */
 .wave{
   display:flex;
   justify-content:center;
@@ -180,7 +173,14 @@ p{
   50%{height:55px;opacity:1;}
 }
 
-/* 📌 Footer */
+/* 🎧 Text */
+.vibe-text{
+  margin-top:10px;
+  font-size:13px;
+  color:#aaa;
+  letter-spacing:1px;
+}
+
 footer{
   margin-top:40px;
   font-size:0.9em;
@@ -191,16 +191,14 @@ footer{
 
 <body>
 
-<!-- 🎥 Video -->
 <video autoplay muted loop>
-  <source src="bg.mp4" type="video/mp4">
+  <source src="bg.mp4">
 </video>
 
 <div class="overlay"></div>
 
-<!-- 🎵 AUDIO -->
 <audio autoplay loop>
-  <source src="song.mp3" type="audio/mp3">
+  <source src="song.mp3">
 </audio>
 
 <div class="container">
@@ -227,10 +225,17 @@ footer{
 
     <!-- 🎧 MUSIC -->
     <div class="music-box">
+
+      <img src="cover.jpg" class="song-cover">
+
       🎧 Now Playing
+
       <div class="wave">
         <span></span><span></span><span></span><span></span><span></span>
       </div>
+
+      <p class="vibe-text">Listen full vibe</p>
+
     </div>
 
     <div class="section">
@@ -244,7 +249,6 @@ footer{
       </ul>
     </div>
 
-    <!-- 🔗 Buttons -->
     <a href="https://t.me/YAsHSTARK_18" target="_blank" class="btn">
       Contact Me on Telegram
     </a>
