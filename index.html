@@ -17,17 +17,19 @@ body,html{
   overflow:hidden;
 }
 
+/* 🎥 Background */
 video{
   position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
+  width:100%;
+  height:100%;
   object-fit:cover;
   z-index:-2;
 }
 
 .overlay{
   position:fixed;
-  width:100%;height:100%;
+  width:100%;
+  height:100%;
   background:rgba(0,0,0,0.65);
   z-index:-1;
 }
@@ -37,7 +39,6 @@ video{
   overflow-y:auto;
   display:flex;
   justify-content:center;
-  align-items:flex-start;
   padding:60px 20px;
 }
 
@@ -48,91 +49,65 @@ video{
   border-radius:25px;
   padding:40px;
   backdrop-filter:blur(15px);
-  border:1px solid rgba(255,255,255,0.2);
   text-align:center;
-  animation:fadeIn 1.2s ease;
 }
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(40px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-.profile{
-  width:150px;height:150px;
-  border-radius:50%;
-  border:3px solid #fff;
-  object-fit:cover;
-  margin-bottom:20px;
-}
-
-h1{font-size:2.8em;margin-bottom:10px;}
-p{font-size:1.1em;line-height:1.6;color:#ddd;}
-
-.section{margin-top:30px;text-align:left;}
-.section h2{margin-bottom:10px;border-bottom:1px solid #fff;padding-bottom:5px;}
-.section ul{list-style:none;line-height:1.9;}
-.section ul li::before{content:"› ";color:#00c6ff;}
-
-.btn{
-  display:inline-block;
-  margin-top:30px;
-  padding:14px 30px;
-  border-radius:50px;
-  text-decoration:none;
-  color:#fff;
-  background:linear-gradient(135deg,#00c6ff,#0072ff);
-  transition:0.3s;
-  box-shadow:0 0 15px #00c6ff;
-}
-.btn:hover{
-  transform:scale(1.08);
-  box-shadow:0 0 25px #00c6ff;
-}
-
-footer{margin-top:40px;font-size:0.9em;color:#aaa;}
-
-/* 🎶 RGB WAVE BOX */
+/* 🎧 PLAYER */
 .music-box{
   margin-top:30px;
   padding:20px;
   border-radius:20px;
-  background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(10px);
+  background:rgba(255,255,255,0.05);
 }
 
-.wave-container{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  margin-top:10px;
+.cover{
+  width:120px;
+  height:120px;
+  border-radius:15px;
+  object-fit:cover;
+  margin-bottom:10px;
 }
 
-.wave{
-  width:6px;
-  height:20px;
+.song-name{
+  color:#ccc;
+  font-size:14px;
+  margin-bottom:10px;
+}
+
+#visualizer{
+  width:100%;
+  height:60px;
+}
+
+.progress{
+  width:100%;
+  height:6px;
+  background:rgba(255,255,255,0.1);
   border-radius:10px;
-  animation:wave 1s infinite ease-in-out;
+  margin-top:10px;
+  cursor:pointer;
 }
 
-/* RGB colors */
-.wave:nth-child(1){background:red;}
-.wave:nth-child(2){background:orange;}
-.wave:nth-child(3){background:yellow;}
-.wave:nth-child(4){background:cyan;}
-.wave:nth-child(5){background:blue;}
-.wave:nth-child(6){background:violet;}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:#00c6ff;
+}
 
-.wave:nth-child(2){animation-delay:0.1s;}
-.wave:nth-child(3){animation-delay:0.2s;}
-.wave:nth-child(4){animation-delay:0.3s;}
-.wave:nth-child(5){animation-delay:0.4s;}
-.wave:nth-child(6){animation-delay:0.5s;}
+.time{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  color:#aaa;
+}
 
-@keyframes wave{
-  0%,100%{height:15px;}
-  50%{height:50px;}
+.play-btn{
+  margin-top:10px;
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:#00c6ff;
+  color:white;
 }
 </style>
 </head>
@@ -140,138 +115,124 @@ footer{margin-top:40px;font-size:0.9em;color:#aaa;}
 <body>
 
 <video autoplay muted loop>
-  <source src="bg.mp4" type="video/mp4">
+  <source src="bg.mp4">
 </video>
 
 <div class="overlay"></div>
 
-<audio id="bgMusic" autoplay loop>
-  <source src="song.mp3" type="audio/mp3">
+<audio id="bgMusic" loop>
+  <source src="song.mp3">
 </audio>
 
 <div class="container">
-  <div class="card">
+<div class="card">
 
-    <img src="file.png" class="profile">
+<h1>YASH</h1>
+<p>16-year-old student from India 🇮🇳</p>
 
-    <h1>YASH</h1>
+<a href="https://t.me/YAsHSTARK_18">Contact Me</a>
 
-    <p>
-      Hi! I'm Yash — 16 years old school student from India 🇮🇳 <br>
-      Living where I belong, dreaming big and growing every day.
-    </p>
+<!-- 🎧 PLAYER -->
+<div class="music-box">
 
-    <div class="section">
-      <h2>About Me</h2>
-      <ul>
-        <li><strong>Country:</strong> India</li>
-        <li><strong>Age:</strong> 16</li>
-        <li><strong>Class:</strong> School Student</li>
-        <li><strong>Hobbies:</strong> Learning, exploring, self growth</li>
-      </ul>
-    </div>
+<img src="cover.jpg" class="cover">
 
-    <div class="section">
-      <h2>Skills</h2>
-      <ul>
-        <li>Creative Thinking</li>
-        <li>Communication</li>
-        <li>Problem Solving</li>
-        <li>Learning & Exploring</li>
-        <li>Self Improvement</li>
-      </ul>
-    </div>
+<p class="song-name">🎧 Playing: Bairan</p>
 
-    <a href="https://t.me/YAsHSTARK_18" target="_blank" class="btn">
-      Contact Me on Telegram
-    </a>
+<canvas id="visualizer"></canvas>
 
-    <!-- 🎶 RGB WAVE -->
-    <div class="music-box">
-      🎧 Now Playing
-      <div class="wave-container">
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-      </div>
-    </div>
-
-    <!-- 💬 Feedback -->
-    <div class="section">
-      <h2>Feedback</h2>
-
-      <textarea id="feedbackInput" placeholder="Write feedback..."
-      style="width:100%; padding:10px; border-radius:10px; margin-top:10px;"></textarea>
-
-      <button onclick="addFeedback()" 
-      style="margin-top:10px; padding:10px 20px; border:none; border-radius:10px;
-      background:#00c6ff; color:white;">Submit</button>
-    </div>
-
-    <!-- 📋 Reviews -->
-    <div class="section">
-      <h2>Reviews</h2>
-      <ul id="feedbackList"></ul>
-    </div>
-
-    <footer>
-      © 2026 Yash. All rights reserved. <br>
-      Built by Yash ⚡
-    </footer>
-
-  </div>
+<div class="progress" onclick="seek(event)">
+  <div class="progress-bar" id="progressBar"></div>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+<div class="time">
+  <span id="current">0:00</span>
+  <span id="duration">0:00</span>
+</div>
 
-const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "YOUR_DOMAIN",
-  projectId: "YOUR_ID",
-  storageBucket: "YOUR_BUCKET",
-  messagingSenderId: "YOUR_MSG_ID",
-  appId: "YOUR_APP_ID"
-};
+<button class="play-btn" onclick="toggleMusic()" id="playBtn">⏸</button>
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+</div>
 
-// ADD FEEDBACK
-window.addFeedback = async function(){
-  let input = document.getElementById("feedbackInput");
-  if(!input.value.trim()) return;
+</div>
+</div>
 
-  await addDoc(collection(db, "feedback"), {
-    text: input.value,
-    time: Date.now()
-  });
-
-  input.value = "";
-};
-
-// REAL-TIME + PERMANENT
-const q = query(collection(db, "feedback"), orderBy("time","desc"));
-
-onSnapshot(q, (snapshot)=>{
-  let list = document.getElementById("feedbackList");
-  list.innerHTML = "";
-
-  snapshot.forEach(doc=>{
-    let li = document.createElement("li");
-    li.textContent = doc.data().text;
-    list.appendChild(li);
-  });
-});
+<script>
+const audio = document.getElementById("bgMusic");
+const btn = document.getElementById("playBtn");
+const progress = document.getElementById("progressBar");
+const current = document.getElementById("current");
+const duration = document.getElementById("duration");
 
 // autoplay fix
-document.body.addEventListener("click", ()=>{
-  document.getElementById("bgMusic").play();
-},{once:true});
+audio.play().catch(()=>{
+  document.addEventListener("click", ()=>audio.play(), {once:true});
+});
+
+// ▶️ play pause
+function toggleMusic(){
+  if(audio.paused){
+    audio.play();
+    btn.innerText="⏸";
+  } else {
+    audio.pause();
+    btn.innerText="▶";
+  }
+}
+
+// ⏱ progress
+audio.addEventListener("timeupdate", ()=>{
+  let percent=(audio.currentTime/audio.duration)*100;
+  progress.style.width=percent+"%";
+  current.innerText=format(audio.currentTime);
+  duration.innerText=format(audio.duration);
+});
+
+function format(t){
+  if(!t) return "0:00";
+  let m=Math.floor(t/60);
+  let s=Math.floor(t%60);
+  return m+":"+(s<10?"0"+s:s);
+}
+
+// 🎯 seek
+function seek(e){
+  let rect=e.currentTarget.getBoundingClientRect();
+  let x=e.clientX-rect.left;
+  audio.currentTime=(x/rect.width)*audio.duration;
+}
+
+// 🌊 visualizer
+const canvas=document.getElementById("visualizer");
+const ctx=canvas.getContext("2d");
+
+let audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+let analyser=audioCtx.createAnalyser();
+let source=audioCtx.createMediaElementSource(audio);
+
+source.connect(analyser);
+analyser.connect(audioCtx.destination);
+
+analyser.fftSize=64;
+let data=new Uint8Array(analyser.frequencyBinCount);
+
+canvas.width=canvas.offsetWidth;
+canvas.height=canvas.offsetHeight;
+
+function draw(){
+  requestAnimationFrame(draw);
+  analyser.getByteFrequencyData(data);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  let w=canvas.width/data.length;
+
+  for(let i=0;i<data.length;i++){
+    let h=data[i]/2;
+    ctx.fillStyle="#00c6ff";
+    ctx.fillRect(i*w,canvas.height-h,w-2,h);
+  }
+}
+draw();
 </script>
 
 </body>
