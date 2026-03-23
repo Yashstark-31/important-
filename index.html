@@ -93,19 +93,6 @@ p{font-size:1.1em;line-height:1.6;color:#ddd;}
 
 footer{margin-top:40px;font-size:0.9em;color:#aaa;}
 
-.wave{
-  width:4px;height:15px;background:#00c6ff;
-  animation:wave 1s infinite ease-in-out;
-}
-.wave:nth-child(2){animation-delay:0.2s;}
-.wave:nth-child(3){animation-delay:0.4s;}
-.wave:nth-child(4){animation-delay:0.6s;}
-
-@keyframes wave{
-  0%,100%{height:10px;}
-  50%{height:25px;}
-}
-
 /* 🎶 Music Box */
 .music-box{
   margin-top:30px;
@@ -115,19 +102,28 @@ footer{margin-top:40px;font-size:0.9em;color:#aaa;}
   backdrop-filter:blur(10px);
 }
 
-.marquee{
-  margin-top:10px;
-  overflow:hidden;
-  white-space:nowrap;
+.wave-container{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin-top:12px;
 }
-.marquee span{
-  display:inline-block;
-  padding-left:100%;
-  animation:scroll 10s linear infinite;
+
+.wave{
+  width:6px;
+  height:20px;
+  background:#00c6ff;
+  border-radius:10px;
+  animation:wave 1.2s infinite ease-in-out;
 }
-@keyframes scroll{
-  0%{transform:translateX(0);}
-  100%{transform:translateX(-100%);}
+.wave:nth-child(2){animation-delay:0.2s;}
+.wave:nth-child(3){animation-delay:0.4s;}
+.wave:nth-child(4){animation-delay:0.6s;}
+.wave:nth-child(5){animation-delay:0.8s;}
+
+@keyframes wave{
+  0%,100%{height:15px;}
+  50%{height:40px;}
 }
 </style>
 </head>
@@ -181,21 +177,22 @@ footer{margin-top:40px;font-size:0.9em;color:#aaa;}
       Contact Me on Telegram
     </a>
 
-    <!-- 🎶 MUSIC BOX (FIXED POSITION) -->
+    <!-- 🎶 MUSIC BOX -->
     <div class="music-box">
       🎧 Now Playing
 
-      <div style="display:flex; justify-content:center; gap:4px; margin-top:10px;">
+      <div class="wave-container">
+        <div class="wave"></div>
         <div class="wave"></div>
         <div class="wave"></div>
         <div class="wave"></div>
         <div class="wave"></div>
       </div>
 
-      <!-- 🎵 CC -->
-      <div class="marquee">
-        <span>♪ Your song is playing... enjoy the vibe 🎶 ♪</span>
-      </div>
+      <!-- 🎵 Lyrics -->
+      <p id="lyrics" style="margin-top:10px; font-size:14px; color:#ccc;">
+        Loading lyrics...
+      </p>
     </div>
 
     <!-- 💬 Feedback -->
@@ -226,7 +223,7 @@ footer{margin-top:40px;font-size:0.9em;color:#aaa;}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "YOUR_KEY",
@@ -240,35 +237,64 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-async function addFeedback(){
+// 💬 ADD FEEDBACK
+window.addFeedback = async function(){
   let input = document.getElementById("feedbackInput");
-  if(input.value.trim() === "") return;
+
+  if(!input.value.trim()){
+    alert("Write something");
+    return;
+  }
 
   await addDoc(collection(db, "feedback"), {
-    text: input.value
+    text: input.value,
+    time: Date.now()
   });
 
   input.value = "";
-  loadFeedback();
-}
+};
 
-async function loadFeedback(){
+// ⚡ REAL-TIME REVIEWS
+const q = query(collection(db, "feedback"), orderBy("time","desc"));
+
+onSnapshot(q, (snapshot)=>{
   let list = document.getElementById("feedbackList");
   list.innerHTML = "";
 
-  const querySnapshot = await getDocs(collection(db, "feedback"));
-  querySnapshot.forEach(doc => {
+  snapshot.forEach(doc=>{
     let li = document.createElement("li");
+    li.style.marginBottom = "8px";
     li.textContent = doc.data().text;
     list.appendChild(li);
   });
-}
+});
 
-loadFeedback();
+// 🎵 LYRICS SYNC (EDIT THIS)
+const lyrics = [
+  {time:0, text:"🎶 Starting song..."},
+  {time:5, text:"Line 1"},
+  {time:10, text:"Line 2"},
+  {time:15, text:"Line 3"}
+];
 
-document.body.addEventListener("click", function(){
-  document.getElementById("bgMusic").play();
-}, {once:true});
+const audio = document.getElementById("bgMusic");
+const lyricsEl = document.getElementById("lyrics");
+
+audio.addEventListener("timeupdate", ()=>{
+  let current = audio.currentTime;
+
+  for(let i=lyrics.length-1;i>=0;i--){
+    if(current >= lyrics[i].time){
+      lyricsEl.innerText = lyrics[i].text;
+      break;
+    }
+  }
+});
+
+// autoplay fix
+document.body.addEventListener("click", ()=>{
+  audio.play();
+},{once:true});
 </script>
 
 </body>
