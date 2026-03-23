@@ -8,7 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
 body,html{
   height:100%;
@@ -17,15 +21,18 @@ body,html{
   overflow:hidden;
 }
 
-/* 🎥 Background */
+/* 🎥 Background Video */
 video{
   position:fixed;
+  top:0;
+  left:0;
   width:100%;
   height:100%;
   object-fit:cover;
   z-index:-2;
 }
 
+/* 🌑 Overlay */
 .overlay{
   position:fixed;
   width:100%;
@@ -34,14 +41,17 @@ video{
   z-index:-1;
 }
 
+/* 📦 Container */
 .container{
   height:100%;
   overflow-y:auto;
   display:flex;
   justify-content:center;
+  align-items:flex-start;
   padding:60px 20px;
 }
 
+/* 💎 Card */
 .card{
   max-width:850px;
   width:100%;
@@ -49,10 +59,17 @@ video{
   border-radius:25px;
   padding:40px;
   backdrop-filter:blur(15px);
+  border:1px solid rgba(255,255,255,0.2);
   text-align:center;
+  animation:fadeIn 1.2s ease;
 }
 
-/* PROFILE */
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* 🧑 Profile */
 .profile{
   width:150px;
   height:150px;
@@ -62,89 +79,111 @@ video{
   margin-bottom:20px;
 }
 
-h1{font-size:2.8em;margin-bottom:10px;}
+/* 🔥 Name */
+h1{
+  font-size:2.8em;
+  margin-bottom:10px;
+}
 
-p{color:#ddd;}
+/* 💬 Text */
+p{
+  font-size:1.1em;
+  line-height:1.6;
+  color:#ddd;
+}
 
-/* SECTIONS */
-.section{margin-top:30px;text-align:left;}
-.section h2{border-bottom:1px solid #fff;margin-bottom:10px;}
-.section ul{list-style:none;}
-.section li{margin-bottom:6px;}
+/* 📋 Sections */
+.section{
+  margin-top:30px;
+  text-align:left;
+}
 
-/* BUTTON */
+.section h2{
+  margin-bottom:10px;
+  border-bottom:1px solid #fff;
+  padding-bottom:5px;
+}
+
+.section ul{
+  list-style:none;
+  line-height:1.9;
+}
+
+.section ul li::before{
+  content:"› ";
+  color:#00c6ff;
+}
+
+/* 🔘 Buttons */
 .btn{
   display:inline-block;
   margin-top:20px;
-  padding:12px 30px;
+  padding:14px 30px;
   border-radius:50px;
-  background:linear-gradient(135deg,#00c6ff,#0072ff);
-  color:#fff;
   text-decoration:none;
+  color:#fff;
+  background:linear-gradient(135deg,#00c6ff,#0072ff);
+  transition:0.3s;
+  box-shadow:0 0 15px #00c6ff;
 }
 
-/* 🎧 PLAYER */
+.btn:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 25px #00c6ff;
+}
+
+/* 📸 Instagram Button */
+.insta{
+  background:linear-gradient(135deg,#ff00cc,#3333ff);
+  box-shadow:0 0 15px #ff00cc;
+}
+
+.insta:hover{
+  box-shadow:0 0 25px #ff00cc;
+}
+
+/* 🎧 MUSIC BOX */
 .music-box{
-  margin-top:40px;
+  margin-top:30px;
   padding:20px;
   border-radius:20px;
   background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  text-align:center;
 }
 
-.cover{
-  width:120px;
-  height:120px;
-  border-radius:15px;
-}
-
-.song-name{margin-top:10px;color:#ccc;}
-
-.progress{
-  width:100%;
-  height:6px;
-  background:rgba(255,255,255,0.1);
-  border-radius:10px;
-  margin-top:10px;
-  cursor:pointer;
-}
-
-.progress-bar{
-  height:100%;
-  width:0%;
-  background:#00c6ff;
-}
-
-.time{
+/* 🌊 WAVE */
+.wave{
   display:flex;
-  justify-content:space-between;
-  font-size:12px;
-  color:#aaa;
-}
-
-.play-btn{
+  justify-content:center;
+  align-items:end;
+  gap:6px;
+  height:60px;
   margin-top:10px;
-  padding:10px 20px;
-  border:none;
-  border-radius:20px;
-  background:#00c6ff;
-  color:white;
 }
 
-/* 🎵 LYRICS */
-.lyrics{
-  margin-top:15px;
-  font-size:16px;
-  color:#aaa;
+.wave span{
+  width:6px;
+  height:20px;
+  border-radius:10px;
+  background:linear-gradient(180deg,#00c6ff,#0072ff);
+  animation:waveAnim 1s infinite ease-in-out;
 }
 
-.active{
-  color:#00c6ff;
-  font-weight:bold;
-  text-shadow:0 0 10px #00c6ff;
+.wave span:nth-child(2){animation-delay:0.1s;}
+.wave span:nth-child(3){animation-delay:0.2s;}
+.wave span:nth-child(4){animation-delay:0.3s;}
+.wave span:nth-child(5){animation-delay:0.4s;}
+
+@keyframes waveAnim{
+  0%,100%{height:15px;opacity:0.6;}
+  50%{height:55px;opacity:1;}
 }
 
+/* 📌 Footer */
 footer{
   margin-top:40px;
+  font-size:0.9em;
   color:#aaa;
 }
 </style>
@@ -152,140 +191,77 @@ footer{
 
 <body>
 
+<!-- 🎥 Video -->
 <video autoplay muted loop>
-  <source src="bg.mp4">
+  <source src="bg.mp4" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
 
-<audio id="bgMusic" loop>
-  <source src="song.mp3">
+<!-- 🎵 AUDIO -->
+<audio autoplay loop>
+  <source src="song.mp3" type="audio/mp3">
 </audio>
 
 <div class="container">
-<div class="card">
+  <div class="card">
 
-<img src="file.png" class="profile">
+    <img src="file.png" class="profile">
 
-<h1>YASH</h1>
+    <h1>YASH</h1>
 
-<p>Hi! I'm Yash — 16 years old school student from India 🇮🇳</p>
+    <p>
+      Hi! I'm Yash — 16 years old school student from India 🇮🇳 <br>
+      Living where I belong, dreaming big and growing every day.
+    </p>
 
-<div class="section">
-<h2>About Me</h2>
-<ul>
-<li>Country: India</li>
-<li>Age: 16</li>
-<li>Student</li>
-</ul>
+    <div class="section">
+      <h2>About Me</h2>
+      <ul>
+        <li><strong>Country:</strong> India</li>
+        <li><strong>Age:</strong> 16</li>
+        <li><strong>Class:</strong> School Student</li>
+        <li><strong>Hobbies:</strong> Learning, exploring, self growth</li>
+      </ul>
+    </div>
+
+    <!-- 🎧 MUSIC -->
+    <div class="music-box">
+      🎧 Now Playing
+      <div class="wave">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Skills</h2>
+      <ul>
+        <li>Creative Thinking</li>
+        <li>Communication</li>
+        <li>Problem Solving</li>
+        <li>Learning & Exploring</li>
+        <li>Self Improvement</li>
+      </ul>
+    </div>
+
+    <!-- 🔗 Buttons -->
+    <a href="https://t.me/YAsHSTARK_18" target="_blank" class="btn">
+      Contact Me on Telegram
+    </a>
+
+    <br>
+
+    <a href="https://www.instagram.com/soul_faith.x?igsh=NXFlYjAyYTd4cnZh" target="_blank" class="btn insta">
+      Follow Me on Instagram
+    </a>
+
+    <footer>
+      © 2026 Yash. All rights reserved. <br>
+      Built by Yash ⚡
+    </footer>
+
+  </div>
 </div>
-
-<div class="section">
-<h2>Skills</h2>
-<ul>
-<li>Creative Thinking</li>
-<li>Problem Solving</li>
-<li>Self Growth</li>
-</ul>
-</div>
-
-<a href="https://t.me/YAsHSTARK_18" class="btn">Contact Me</a>
-
-<!-- 🎧 PLAYER (NICHE ADD KIYA) -->
-<div class="music-box">
-
-<img src="cover.jpg" class="cover">
-
-<p class="song-name">🎧 Playing: Bairan</p>
-
-<div class="progress" onclick="seek(event)">
-  <div class="progress-bar" id="progressBar"></div>
-</div>
-
-<div class="time">
-  <span id="current">0:00</span>
-  <span id="duration">0:00</span>
-</div>
-
-<button class="play-btn" onclick="toggleMusic()" id="playBtn">⏸</button>
-
-<!-- 🎵 LYRICS -->
-<div id="lyrics" class="lyrics"></div>
-
-</div>
-
-<footer>
-Made by Yash ⚡
-</footer>
-
-</div>
-</div>
-
-<script>
-const audio=document.getElementById("bgMusic");
-const btn=document.getElementById("playBtn");
-const progress=document.getElementById("progressBar");
-const current=document.getElementById("current");
-const duration=document.getElementById("duration");
-const lyricsBox=document.getElementById("lyrics");
-
-audio.play().catch(()=>{
-  document.addEventListener("click",()=>audio.play(),{once:true});
-});
-
-// toggle
-function toggleMusic(){
-  if(audio.paused){
-    audio.play(); btn.innerText="⏸";
-  } else {
-    audio.pause(); btn.innerText="▶";
-  }
-}
-
-// progress
-audio.addEventListener("timeupdate",()=>{
-  let p=(audio.currentTime/audio.duration)*100;
-  progress.style.width=p+"%";
-  current.innerText=format(audio.currentTime);
-  duration.innerText=format(audio.duration);
-  updateLyrics(audio.currentTime);
-});
-
-function format(t){
-  if(!t) return "0:00";
-  let m=Math.floor(t/60);
-  let s=Math.floor(t%60);
-  return m+":"+(s<10?"0"+s:s);
-}
-
-// seek
-function seek(e){
-  let r=e.currentTarget.getBoundingClientRect();
-  let x=e.clientX-r.left;
-  audio.currentTime=(x/r.width)*audio.duration;
-}
-
-/* 🔥 SYNC LYRICS */
-const lyrics = [
-{time:0,text:"🎶 Bairan"},
-{time:5,text:"Tere bina dil kahin na lage"},
-{time:10,text:"Raaton me tera hi khayal jage"},
-{time:15,text:"Saanson me basi hai teri baatein"},
-{time:20,text:"Dil ye pukare tu hi tu aake"},
-{time:25,text:"Bairan si yaadein sataaye mujhe"},
-{time:30,text:"Har pal tera ehsaas dilaye mujhe"}
-];
-
-function updateLyrics(time){
-  let line="";
-  for(let i=0;i<lyrics.length;i++){
-    if(time>=lyrics[i].time){
-      line=lyrics[i].text;
-    }
-  }
-  lyricsBox.innerHTML=`<span class="active">${line}</span>`;
-}
-</script>
 
 </body>
 </html>
