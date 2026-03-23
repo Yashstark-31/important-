@@ -8,11 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body,html{
   height:100%;
@@ -23,18 +19,15 @@ body,html{
 
 video{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  top:0;left:0;
+  width:100%;height:100%;
   object-fit:cover;
   z-index:-2;
 }
 
 .overlay{
   position:fixed;
-  width:100%;
-  height:100%;
+  width:100%;height:100%;
   background:rgba(0,0,0,0.65);
   z-index:-1;
 }
@@ -66,49 +59,25 @@ video{
 }
 
 .profile{
-  width:150px;
-  height:150px;
+  width:150px;height:150px;
   border-radius:50%;
   border:3px solid #fff;
   object-fit:cover;
   margin-bottom:20px;
 }
 
-h1{
-  font-size:2.8em;
-  margin-bottom:10px;
-}
+h1{font-size:2.8em;margin-bottom:10px;}
 
-p{
-  font-size:1.1em;
-  line-height:1.6;
-  color:#ddd;
-}
+p{font-size:1.1em;line-height:1.6;color:#ddd;}
 
-.section{
-  margin-top:30px;
-  text-align:left;
-}
-
-.section h2{
-  margin-bottom:10px;
-  border-bottom:1px solid #fff;
-  padding-bottom:5px;
-}
-
-.section ul{
-  list-style:none;
-  line-height:1.9;
-}
-
-.section ul li::before{
-  content:"› ";
-  color:#00c6ff;
-}
+.section{margin-top:30px;text-align:left;}
+.section h2{margin-bottom:10px;border-bottom:1px solid #fff;padding-bottom:5px;}
+.section ul{list-style:none;line-height:1.9;}
+.section ul li::before{content:"› ";color:#00c6ff;}
 
 .btn{
   display:inline-block;
-  margin-top:20px;
+  margin-top:30px;
   padding:14px 30px;
   border-radius:50px;
   text-decoration:none;
@@ -117,74 +86,23 @@ p{
   transition:0.3s;
   box-shadow:0 0 15px #00c6ff;
 }
-
 .btn:hover{
   transform:scale(1.08);
   box-shadow:0 0 25px #00c6ff;
 }
 
-.insta{
-  background:linear-gradient(135deg,#ff00cc,#3333ff);
-  box-shadow:0 0 15px #ff00cc;
-}
+footer{margin-top:40px;font-size:0.9em;color:#aaa;}
 
-.music-box{
-  margin-top:30px;
-  padding:20px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(10px);
-}
-
-/* 🎵 Cover Image */
-.song-cover{
-  width:120px;
-  height:120px;
-  border-radius:15px;
-  object-fit:cover;
-  margin-bottom:10px;
-}
-
-/* 🌊 Wave */
 .wave{
-  display:flex;
-  justify-content:center;
-  align-items:end;
-  gap:6px;
-  height:60px;
-  margin-top:10px;
+  width:4px;height:15px;background:#00c6ff;
+  animation:wave 1s infinite ease-in-out;
 }
-
-.wave span{
-  width:6px;
-  height:20px;
-  border-radius:10px;
-  background:linear-gradient(180deg,#00c6ff,#0072ff);
-  animation:waveAnim 1s infinite ease-in-out;
-}
-
-.wave span:nth-child(2){animation-delay:0.1s;}
-.wave span:nth-child(3){animation-delay:0.2s;}
-.wave span:nth-child(4){animation-delay:0.3s;}
-.wave span:nth-child(5){animation-delay:0.4s;}
-
-@keyframes waveAnim{
-  0%,100%{height:15px;opacity:0.6;}
-  50%{height:55px;opacity:1;}
-}
-
-/* 🎧 Text */
-.vibe-text{
-  margin-top:10px;
-  font-size:13px;
-  color:#aaa;
-  letter-spacing:1px;
-}
-
-footer{
-  margin-top:40px;
-  font-size:0.9em;
-  color:#aaa;
+.wave:nth-child(2){animation-delay:0.2s;}
+.wave:nth-child(3){animation-delay:0.4s;}
+.wave:nth-child(4){animation-delay:0.6s;}
+@keyframes wave{
+  0%,100%{height:10px;}
+  50%{height:25px;}
 }
 </style>
 </head>
@@ -192,14 +110,29 @@ footer{
 <body>
 
 <video autoplay muted loop>
-  <source src="bg.mp4">
+  <source src="bg.mp4" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
 
-<audio autoplay loop>
-  <source src="song.mp3">
+<!-- 🎵 Music -->
+<audio id="bgMusic" autoplay loop>
+  <source src="song.mp3" type="audio/mp3">
 </audio>
+
+<!-- 🎶 Music Box -->
+<div style="position:fixed; bottom:120px; left:50%; transform:translateX(-50%);
+background:rgba(255,255,255,0.1); padding:12px 20px; border-radius:15px;
+backdrop-filter:blur(10px); text-align:center; font-size:14px;">
+  🎧 Now Playing...
+  <div style="display:flex; justify-content:center; gap:4px; margin-top:8px;">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+  <p style="margin-top:6px; font-size:12px;">Listen full song then go</p>
+</div>
 
 <div class="container">
   <div class="card">
@@ -223,21 +156,6 @@ footer{
       </ul>
     </div>
 
-    <!-- 🎧 MUSIC -->
-    <div class="music-box">
-
-      <img src="cover.jpg" class="song-cover">
-
-      🎧 Now Playing
-
-      <div class="wave">
-        <span></span><span></span><span></span><span></span><span></span>
-      </div>
-
-      <p class="vibe-text">Listen full vibe</p>
-
-    </div>
-
     <div class="section">
       <h2>Skills</h2>
       <ul>
@@ -253,11 +171,19 @@ footer{
       Contact Me on Telegram
     </a>
 
-    <br>
+    <!-- 💬 Feedback -->
+    <div class="section">
+      <h2>Feedback</h2>
 
-    <a href="https://www.instagram.com/soul_faith.x?igsh=NXFlYjAyYTd4cnZh" target="_blank" class="btn insta">
-      Follow Me on Instagram
-    </a>
+      <textarea id="feedbackInput" placeholder="Write feedback..."
+      style="width:100%; padding:10px; border-radius:10px; margin-top:10px;"></textarea>
+
+      <button onclick="addFeedback()" 
+      style="margin-top:10px; padding:10px 20px; border:none; border-radius:10px;
+      background:#00c6ff; color:white;">Submit</button>
+
+      <ul id="feedbackList" style="margin-top:20px;"></ul>
+    </div>
 
     <footer>
       © 2026 Yash. All rights reserved. <br>
@@ -266,6 +192,55 @@ footer{
 
   </div>
 </div>
+
+<!-- 🔥 Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_ID",
+  storageBucket: "YOUR_BUCKET",
+  messagingSenderId: "YOUR_MSG_ID",
+  appId: "YOUR_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function addFeedback(){
+  let input = document.getElementById("feedbackInput");
+  if(input.value.trim() === "") return;
+
+  await addDoc(collection(db, "feedback"), {
+    text: input.value,
+    time: Date.now()
+  });
+
+  input.value = "";
+  loadFeedback();
+}
+
+async function loadFeedback(){
+  let list = document.getElementById("feedbackList");
+  list.innerHTML = "";
+
+  const querySnapshot = await getDocs(collection(db, "feedback"));
+  querySnapshot.forEach(doc => {
+    let li = document.createElement("li");
+    li.textContent = doc.data().text;
+    list.appendChild(li);
+  });
+}
+
+loadFeedback();
+
+document.body.addEventListener("click", function(){
+  document.getElementById("bgMusic").play();
+}, {once:true});
+</script>
 
 </body>
 </html>
