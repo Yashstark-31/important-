@@ -1,278 +1,195 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YASH - PORTFOLIO</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
+<title>ULTRA FPS</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body,html{
-  height:100%;
-  font-family:'Poppins',sans-serif;
-  color:#fff;
-  overflow:hidden;
-}
-
-video{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  z-index:-2;
-}
-
-.overlay{
-  position:fixed;
-  width:100%;height:100%;
-  background:rgba(0,0,0,0.65);
-  z-index:-1;
-}
-
-.container{
-  height:100%;
-  overflow-y:auto;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  padding:60px 20px;
-}
-
-.card{
-  max-width:850px;
-  width:100%;
-  background:rgba(255,255,255,0.08);
-  border-radius:25px;
-  padding:40px;
-  backdrop-filter:blur(15px);
-  border:1px solid rgba(255,255,255,0.2);
-  text-align:center;
-  animation:fadeIn 1.2s ease;
-}
-
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(40px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-.profile{
-  width:150px;height:150px;
-  border-radius:50%;
-  border:3px solid #fff;
-  object-fit:cover;
-  margin-bottom:20px;
-}
-
-h1{font-size:2.8em;margin-bottom:10px;}
-
-p{font-size:1.1em;line-height:1.6;color:#ddd;}
-
-.section{margin-top:30px;text-align:left;}
-
-.section h2{
-  margin-bottom:10px;
-  border-bottom:1px solid #fff;
-  padding-bottom:5px;
-}
-
-.section ul{list-style:none;line-height:1.9;}
-.section ul li::before{content:"› ";color:#00c6ff;}
-
-/* 🎧 Spotify Card */
-.music{
-  margin-top:30px;
-  background:rgba(0,0,0,0.6);
-  padding:15px;
-  border-radius:15px;
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
-.music img{
-  width:70px;
-  height:70px;
-  border-radius:10px;
-}
-
-.music-info{
-  flex:1;
-  text-align:left;
-}
-
-.music-info h3{
-  font-size:1em;
-}
-
-.music-info span{
-  font-size:0.8em;
-  color:#aaa;
-}
-
-/* ▶️ Play button */
-.play{
-  width:40px;height:40px;
-  border-radius:50%;
-  background:#1db954;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-}
-
-/* 🌊 Wave */
-.wave{
-  display:flex;
-  gap:3px;
-  margin-top:8px;
-}
-
-.wave span{
-  width:3px;
-  height:10px;
-  background:#1db954;
-  animation:wave 1s infinite;
-}
-
-.wave span:nth-child(2){animation-delay:0.2s;}
-.wave span:nth-child(3){animation-delay:0.4s;}
-.wave span:nth-child(4){animation-delay:0.6s;}
-.wave span:nth-child(5){animation-delay:0.8s;}
-
-@keyframes wave{
-  0%,100%{height:8px;}
-  50%{height:18px;}
-}
-
-/* 🔘 Buttons */
-.btn{
-  display:inline-block;
-  margin-top:30px;
-  padding:14px 30px;
-  border-radius:50px;
-  text-decoration:none;
-  color:#fff;
-  background:linear-gradient(135deg,#00c6ff,#0072ff);
-  transition:0.3s;
-  box-shadow:0 0 15px #00c6ff;
-}
-
-.btn:hover{
-  transform:scale(1.08);
-  box-shadow:0 0 25px #00c6ff;
-}
-
-/* Instagram */
-.insta{
-  display:inline-block;
-  margin-top:15px;
-  padding:12px 25px;
-  border-radius:50px;
-  text-decoration:none;
-  color:#fff;
-  background:linear-gradient(45deg,#feda75,#d62976,#962fbf);
-}
-
-/* Footer */
-footer{
-  margin-top:40px;
-  font-size:0.9em;
-  color:#aaa;
+body{margin:0;overflow:hidden;background:black;}
+#start{position:absolute;top:40%;width:100%;text-align:center;color:white;font-size:22px;cursor:pointer;}
+#ui{position:absolute;top:10px;left:10px;color:white;font-size:18px;}
+#crosshair{
+ position:absolute;top:50%;left:50%;
+ width:12px;height:12px;background:red;
+ transform:translate(-50%,-50%);
 }
 </style>
 </head>
-
 <body>
 
-<video autoplay muted loop>
-  <source src="bg.mp4" type="video/mp4">
-</video>
+<div id="start">CLICK TO START</div>
+<div id="ui">❤️ 100 | 🎯 0 | 🔫 READY</div>
+<div id="crosshair"></div>
 
-<div class="overlay"></div>
-
-<div class="container">
-  <div class="card">
-
-    <img src="file.png" class="profile">
-
-    <h1>YASH</h1>
-
-    <p>
-      Hi! I'm Yash — 16 years old school student from India 🇮🇳 <br>
-      Living where I belong, dreaming big and growing every day.
-    </p>
-
-    <!-- About -->
-    <div class="section">
-      <h2>About Me</h2>
-      <ul>
-        <li><strong>Country:</strong> India</li>
-        <li><strong>Age:</strong> 16</li>
-        <li><strong>Class:</strong> School Student</li>
-        <li><strong>Hobbies:</strong> Learning, exploring, self growth</li>
-      </ul>
-    </div>
-
-    <!-- 🎧 MUSIC PLAYER -->
-    <div class="music">
-      <img src="cover.jpg">
-      <div class="music-info">
-        <h3>Bairan</h3>
-        <span>Now Playing</span>
-
-        <div class="wave">
-          <span></span><span></span><span></span><span></span><span></span>
-        </div>
-      </div>
-      <div class="play" onclick="toggleMusic()">▶</div>
-    </div>
-
-    <audio id="audio" src="song.mp3"></audio>
-
-    <!-- Skills -->
-    <div class="section">
-      <h2>Skills</h2>
-      <ul>
-        <li>Creative Thinking</li>
-        <li>Communication</li>
-        <li>Problem Solving</li>
-        <li>Learning & Exploring</li>
-        <li>Self Improvement</li>
-      </ul>
-    </div>
-
-    <!-- Buttons -->
-    <a href="https://t.me/YAsHSTARK_18" target="_blank" class="btn">
-      Contact Me on Telegram
-    </a>
-
-    <br>
-
-    <a href="https://www.instagram.com/soul_faith.x?igsh=NXFlYjAyYTd4cnZh" target="_blank" class="insta">
-      Follow Me on Instagram
-    </a>
-
-    <footer>
-      © 2026 Yash. All rights reserved. <br>
-      Built by Yash ⚡
-    </footer>
-
-  </div>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/controls/PointerLockControls.js"></script>
 
 <script>
-let audio = document.getElementById("audio");
+// ===== SCENE =====
+let scene=new THREE.Scene();
+scene.background=new THREE.Color(0x87ceeb);
 
-function toggleMusic(){
-  if(audio.paused){
-    audio.play();
-  }else{
-    audio.pause();
-  }
+let camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
+camera.position.y=1.6;
+
+let renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth,innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// ===== LIGHT =====
+scene.add(new THREE.HemisphereLight(0xffffff,0x444444));
+let sun=new THREE.DirectionalLight(0xffffff,1);
+sun.position.set(10,20,10);
+scene.add(sun);
+
+// ===== MAP =====
+let ground=new THREE.Mesh(
+ new THREE.PlaneGeometry(600,600),
+ new THREE.MeshStandardMaterial({color:0x228B22})
+);
+ground.rotation.x=-Math.PI/2;
+scene.add(ground);
+
+// random buildings
+for(let i=0;i<50;i++){
+ let size=Math.random()*6+3;
+ let b=new THREE.Mesh(
+  new THREE.BoxGeometry(size,size,size),
+  new THREE.MeshStandardMaterial({color:0x888888})
+ );
+ b.position.set((Math.random()-0.5)*300,size/2,-Math.random()*300);
+ scene.add(b);
 }
+
+// ===== CONTROLS =====
+let controls=new THREE.PointerLockControls(camera,document.body);
+start.onclick=()=>controls.lock();
+controls.addEventListener("lock",()=>start.style.display="none");
+scene.add(controls.getObject());
+
+// ===== PLAYER =====
+let health=100,score=0;
+let velocity=new THREE.Vector3();
+let velocityY=0,onGround=true;
+
+// ===== INPUT =====
+let keys={};
+onkeydown=e=>keys[e.key]=true;
+onkeyup=e=>keys[e.key]=false;
+
+// ===== ENEMIES =====
+let enemies=[];
+function spawnEnemy(){
+ let e=new THREE.Mesh(
+  new THREE.BoxGeometry(1,1,1),
+  new THREE.MeshStandardMaterial({color:0xff0000})
+ );
+ e.position.set((Math.random()-0.5)*250,0.5,-Math.random()*250);
+ e.speed=Math.random()*0.03+0.01;
+ scene.add(e);
+ enemies.push(e);
+}
+for(let i=0;i<15;i++) spawnEnemy();
+
+// ===== GUN SYSTEM =====
+let canShoot=true;
+let reloadTime=300;
+let status="READY";
+
+let gun=new THREE.Mesh(
+ new THREE.BoxGeometry(0.3,0.3,1.2),
+ new THREE.MeshStandardMaterial({color:0x111111})
+);
+gun.position.set(0.5,-0.5,-1);
+camera.add(gun);
+scene.add(camera);
+
+// ===== SHOOT =====
+document.addEventListener("click",()=>{
+ if(!controls.isLocked || !canShoot) return;
+
+ canShoot=false;
+ status="RELOAD";
+
+ let ray=new THREE.Raycaster();
+ ray.setFromCamera({x:0,y:0},camera);
+
+ enemies.forEach((e,i)=>{
+   let hit=ray.intersectObject(e);
+   if(hit.length>0){
+     e.scale.set(0.5,0.5,0.5); // hit effect
+     setTimeout(()=>scene.remove(e),100);
+     enemies.splice(i,1);
+     score+=10;
+     spawnEnemy();
+   }
+ });
+
+ gun.rotation.x -= 0.15;
+ setTimeout(()=>gun.rotation.x += 0.15,100);
+
+ setTimeout(()=>{
+   canShoot=true;
+   status="READY";
+ },reloadTime);
+});
+
+// ===== ENEMY AI =====
+function enemyAI(){
+ enemies.forEach(e=>{
+   let dir=new THREE.Vector3().subVectors(camera.position,e.position).normalize();
+   e.position.add(dir.multiplyScalar(e.speed));
+
+   let dist=camera.position.distanceTo(e.position);
+   if(dist<2) health-=0.5;
+ });
+}
+
+// ===== MOVEMENT =====
+function movement(){
+ let speed=keys["Shift"]?0.25:0.12;
+
+ velocity.x*=0.8;
+ velocity.z*=0.8;
+
+ if(keys["w"]) velocity.z -= speed;
+ if(keys["s"]) velocity.z += speed;
+ if(keys["a"]) velocity.x -= speed;
+ if(keys["d"]) velocity.x += speed;
+
+ controls.moveRight(velocity.x);
+ controls.moveForward(velocity.z);
+
+ // jump
+ if(keys[" "] && onGround){
+   velocityY=0.25;
+   onGround=false;
+ }
+ velocityY -= 0.015;
+ camera.position.y += velocityY;
+
+ if(camera.position.y<1.6){
+   camera.position.y=1.6;
+   velocityY=0;
+   onGround=true;
+ }
+}
+
+// ===== LOOP =====
+function animate(){
+ requestAnimationFrame(animate);
+
+ movement();
+ enemyAI();
+
+ ui.innerHTML=`❤️ ${Math.floor(health)} | 🎯 ${score} | 🔫 ${status}`;
+
+ if(health<=0){
+   alert("GAME OVER | SCORE: "+score);
+   location.reload();
+ }
+
+ renderer.render(scene,camera);
+}
+animate();
 </script>
 
 </body>
