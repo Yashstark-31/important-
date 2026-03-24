@@ -71,10 +71,83 @@ h1{font-size:2.8em;margin-bottom:10px;}
 p{font-size:1.1em;line-height:1.6;color:#ddd;}
 
 .section{margin-top:30px;text-align:left;}
-.section h2{margin-bottom:10px;border-bottom:1px solid #fff;padding-bottom:5px;}
+
+.section h2{
+  margin-bottom:10px;
+  border-bottom:1px solid #fff;
+  padding-bottom:5px;
+}
+
 .section ul{list-style:none;line-height:1.9;}
 .section ul li::before{content:"› ";color:#00c6ff;}
 
+/* 🎧 Spotify Card */
+.music{
+  margin-top:30px;
+  background:rgba(0,0,0,0.6);
+  padding:15px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.music img{
+  width:70px;
+  height:70px;
+  border-radius:10px;
+}
+
+.music-info{
+  flex:1;
+  text-align:left;
+}
+
+.music-info h3{
+  font-size:1em;
+}
+
+.music-info span{
+  font-size:0.8em;
+  color:#aaa;
+}
+
+/* ▶️ Play button */
+.play{
+  width:40px;height:40px;
+  border-radius:50%;
+  background:#1db954;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+/* 🌊 Wave */
+.wave{
+  display:flex;
+  gap:3px;
+  margin-top:8px;
+}
+
+.wave span{
+  width:3px;
+  height:10px;
+  background:#1db954;
+  animation:wave 1s infinite;
+}
+
+.wave span:nth-child(2){animation-delay:0.2s;}
+.wave span:nth-child(3){animation-delay:0.4s;}
+.wave span:nth-child(4){animation-delay:0.6s;}
+.wave span:nth-child(5){animation-delay:0.8s;}
+
+@keyframes wave{
+  0%,100%{height:8px;}
+  50%{height:18px;}
+}
+
+/* 🔘 Buttons */
 .btn{
   display:inline-block;
   margin-top:30px;
@@ -86,23 +159,28 @@ p{font-size:1.1em;line-height:1.6;color:#ddd;}
   transition:0.3s;
   box-shadow:0 0 15px #00c6ff;
 }
+
 .btn:hover{
   transform:scale(1.08);
   box-shadow:0 0 25px #00c6ff;
 }
 
-footer{margin-top:40px;font-size:0.9em;color:#aaa;}
-
-.wave{
-  width:4px;height:15px;background:#00c6ff;
-  animation:wave 1s infinite ease-in-out;
+/* Instagram */
+.insta{
+  display:inline-block;
+  margin-top:15px;
+  padding:12px 25px;
+  border-radius:50px;
+  text-decoration:none;
+  color:#fff;
+  background:linear-gradient(45deg,#feda75,#d62976,#962fbf);
 }
-.wave:nth-child(2){animation-delay:0.2s;}
-.wave:nth-child(3){animation-delay:0.4s;}
-.wave:nth-child(4){animation-delay:0.6s;}
-@keyframes wave{
-  0%,100%{height:10px;}
-  50%{height:25px;}
+
+/* Footer */
+footer{
+  margin-top:40px;
+  font-size:0.9em;
+  color:#aaa;
 }
 </style>
 </head>
@@ -114,25 +192,6 @@ footer{margin-top:40px;font-size:0.9em;color:#aaa;}
 </video>
 
 <div class="overlay"></div>
-
-<!-- 🎵 Music -->
-<audio id="bgMusic" autoplay loop>
-  <source src="song.mp3" type="audio/mp3">
-</audio>
-
-<!-- 🎶 Music Box -->
-<div style="position:fixed; bottom:120px; left:50%; transform:translateX(-50%);
-background:rgba(255,255,255,0.1); padding:12px 20px; border-radius:15px;
-backdrop-filter:blur(10px); text-align:center; font-size:14px;">
-  🎧 Now Playing...
-  <div style="display:flex; justify-content:center; gap:4px; margin-top:8px;">
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-  </div>
-  <p style="margin-top:6px; font-size:12px;">Listen full song then go</p>
-</div>
 
 <div class="container">
   <div class="card">
@@ -146,6 +205,7 @@ backdrop-filter:blur(10px); text-align:center; font-size:14px;">
       Living where I belong, dreaming big and growing every day.
     </p>
 
+    <!-- About -->
     <div class="section">
       <h2>About Me</h2>
       <ul>
@@ -156,6 +216,23 @@ backdrop-filter:blur(10px); text-align:center; font-size:14px;">
       </ul>
     </div>
 
+    <!-- 🎧 MUSIC PLAYER -->
+    <div class="music">
+      <img src="cover.jpg">
+      <div class="music-info">
+        <h3>Bairan</h3>
+        <span>Now Playing</span>
+
+        <div class="wave">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="play" onclick="toggleMusic()">▶</div>
+    </div>
+
+    <audio id="audio" src="song.mp3"></audio>
+
+    <!-- Skills -->
     <div class="section">
       <h2>Skills</h2>
       <ul>
@@ -167,23 +244,16 @@ backdrop-filter:blur(10px); text-align:center; font-size:14px;">
       </ul>
     </div>
 
+    <!-- Buttons -->
     <a href="https://t.me/YAsHSTARK_18" target="_blank" class="btn">
       Contact Me on Telegram
     </a>
 
-    <!-- 💬 Feedback -->
-    <div class="section">
-      <h2>Feedback</h2>
+    <br>
 
-      <textarea id="feedbackInput" placeholder="Write feedback..."
-      style="width:100%; padding:10px; border-radius:10px; margin-top:10px;"></textarea>
-
-      <button onclick="addFeedback()" 
-      style="margin-top:10px; padding:10px 20px; border:none; border-radius:10px;
-      background:#00c6ff; color:white;">Submit</button>
-
-      <ul id="feedbackList" style="margin-top:20px;"></ul>
-    </div>
+    <a href="https://www.instagram.com/soul_faith.x?igsh=NXFlYjAyYTd4cnZh" target="_blank" class="insta">
+      Follow Me on Instagram
+    </a>
 
     <footer>
       © 2026 Yash. All rights reserved. <br>
@@ -193,53 +263,16 @@ backdrop-filter:blur(10px); text-align:center; font-size:14px;">
   </div>
 </div>
 
-<!-- 🔥 Firebase -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+<script>
+let audio = document.getElementById("audio");
 
-const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "YOUR_DOMAIN",
-  projectId: "YOUR_ID",
-  storageBucket: "YOUR_BUCKET",
-  messagingSenderId: "YOUR_MSG_ID",
-  appId: "YOUR_APP_ID"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-async function addFeedback(){
-  let input = document.getElementById("feedbackInput");
-  if(input.value.trim() === "") return;
-
-  await addDoc(collection(db, "feedback"), {
-    text: input.value,
-    time: Date.now()
-  });
-
-  input.value = "";
-  loadFeedback();
+function toggleMusic(){
+  if(audio.paused){
+    audio.play();
+  }else{
+    audio.pause();
+  }
 }
-
-async function loadFeedback(){
-  let list = document.getElementById("feedbackList");
-  list.innerHTML = "";
-
-  const querySnapshot = await getDocs(collection(db, "feedback"));
-  querySnapshot.forEach(doc => {
-    let li = document.createElement("li");
-    li.textContent = doc.data().text;
-    list.appendChild(li);
-  });
-}
-
-loadFeedback();
-
-document.body.addEventListener("click", function(){
-  document.getElementById("bgMusic").play();
-}, {once:true});
 </script>
 
 </body>
